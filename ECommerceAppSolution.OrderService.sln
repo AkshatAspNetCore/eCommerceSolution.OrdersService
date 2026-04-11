@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.36310.24
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerceSolution.OrderService", "ECommerceSolution.OrderService\ECommerceSolution.OrderService.csproj", "{8FE082CF-9C44-424E-B270-D74B69D2701E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicLayer", "BusinessLogicLayer\BusinessLogicLayer\BusinessLogicLayer.csproj", "{43D52290-3F0D-475A-8B15-4647CA2348C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicLayer", "BusinessLogicLayer\BusinessLogicLayer.csproj", "{43D52290-3F0D-475A-8B15-4647CA2348C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{39EF6269-CFD1-4B5D-A528-ADBB5A0FA759}"
 EndProject
