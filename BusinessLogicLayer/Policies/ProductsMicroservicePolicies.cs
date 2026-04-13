@@ -20,7 +20,7 @@ public class ProductsMicroservicePolicies : IProductsMicroservicePolicies
     {
         AsyncFallbackPolicy<HttpResponseMessage> policy = Policy.HandleResult<HttpResponseMessage>(r => !r.IsSuccessStatusCode)
             .FallbackAsync(async (context) => {
-            _logger.LogWarning("Fallback triggered: The request failed, returning dummy data.");\
+            _logger.LogWarning("Fallback triggered: The request failed, returning dummy data.");
 
                 ProductDTO dummyProduct = new ProductDTO(
                     ProductID: Guid.Empty,
