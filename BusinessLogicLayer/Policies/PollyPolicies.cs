@@ -44,7 +44,7 @@ public class PollyPolicies : IPollyPolicies
             },
             onReset: () =>
             {
-                _logger.LogInformation("Circuit breaker closed. The subsequest requests will be allowed.");
+                _logger.LogInformation("Circuit breaker closed. The subsequent requests will be allowed.");
             });
         return policy;
     }
