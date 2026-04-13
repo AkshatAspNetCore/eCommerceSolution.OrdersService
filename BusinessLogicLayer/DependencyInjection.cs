@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer.Mappers;
+using BusinessLogicLayer.Policies;
 using BusinessLogicLayer.ServiceContracts;
 using BusinessLogicLayer.Services;
 using BusinessLogicLayer.Validators;
@@ -28,6 +29,7 @@ public static class DependencyInjection
         });
 
         services.AddScoped<IOrdersService, OrdersService>();
+        services.AddTransient<IPollyPolicies, PollyPolicies>();
         return services;
     }
 }
