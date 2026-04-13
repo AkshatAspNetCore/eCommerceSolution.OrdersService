@@ -30,6 +30,12 @@ public static class DependencyInjection
 
         services.AddScoped<IOrdersService, OrdersService>();
         services.AddTransient<IPollyPolicies, PollyPolicies>();
+
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = $"{configuration["REDIS_HOST"]}:{configuration["REDIS_PORT"]}";
+        });
+
         return services;
     }
 }
