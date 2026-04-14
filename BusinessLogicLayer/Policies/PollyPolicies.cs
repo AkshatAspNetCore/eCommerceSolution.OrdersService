@@ -10,9 +10,9 @@ namespace BusinessLogicLayer.Policies;
 
 public class PollyPolicies : IPollyPolicies
 {
-    private readonly ILogger<UsersMicroservicePolicies> _logger;
+    private readonly ILogger<PollyPolicies> _logger;
 
-    public PollyPolicies(ILogger<UsersMicroservicePolicies> logger)
+    public PollyPolicies(ILogger<PollyPolicies> logger)
     {
         _logger = logger;
     }

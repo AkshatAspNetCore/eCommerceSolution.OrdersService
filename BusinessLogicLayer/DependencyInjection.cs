@@ -29,7 +29,7 @@ public static class DependencyInjection
         });
 
         services.AddScoped<IOrdersService, OrdersService>();
-        services.AddTransient<IPollyPolicies, PollyPolicies>();
+        services.AddSingleton<IPollyPolicies, PollyPolicies>();
 
         services.AddStackExchangeRedisCache(options =>
         {
