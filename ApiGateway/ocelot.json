@@ -1,0 +1,23 @@
+{
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/gateway/orders",
+      "DownstreamPathTemplate": "/api/Orders",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ecommercesolution.orderservice",
+          "Port": 8080
+        }
+      ],
+      /*
+  http://localhost:4000/gateway/orders //Upstream
+  http://ecommercesolution.orderservice:8080/api/Orders //Downstream
+  */
+      "UpstreamHttpMethod": [ "Get", "Post", "Options" ],
+      "DownstreamScheme": "http"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:4000"
+  }
+}
