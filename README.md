@@ -25,6 +25,7 @@ Services communicate via **HTTP clients** with **Polly-based fault tolerance** (
 
 **Infrastructure**
 - Docker & Docker Compose — multi-container orchestration
+  MongoDB — NoSQL document database
 - Ocelot API Gateway
 - Polyglot persistence (MongoDB, MySQL, PostgreSQL)
 
