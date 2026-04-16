@@ -33,12 +33,12 @@ Services communicate via **HTTP clients** with **Polly-based fault tolerance** (
 - Angular + TypeScript — UI for orders, products, users
 
 ## 📐 Project Structure (Clean Architecture)
-├── ApiGateway/                      # Ocelot gateway routing requests to services
-├── BusinessLogicLayer/              # Services, DTOs, Mappers, Validators, Policies
-├── DataAccessLayer/                 # Repositories, Entities, MongoDB context
-├── ECommerceSolution.OrderService/  # API layer, Controllers, Program.cs, Dockerfile
-├── docker-compose.yml               # Multi-container orchestration
-└── docker-compose.override.yml      # Development overrides
+├── ApiGateway/                      # Ocelot gateway routing requests to services  
+├── BusinessLogicLayer/              # Services, DTOs, Mappers, Validators, Policies  
+├── DataAccessLayer/                 # Repositories, Entities, MongoDB context  
+├── ECommerceSolution.OrderService/  # API layer, Controllers, Program.cs, Dockerfile  
+├── docker-compose.yml               # Multi-container orchestration  
+└── docker-compose.override.yml      # Development overrides  
 
 ## 🚀 Getting Started
 
