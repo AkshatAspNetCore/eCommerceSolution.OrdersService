@@ -18,8 +18,7 @@ Services communicate via **HTTP clients** with **Polly-based fault tolerance** (
 
 **Backend**
 - ASP.NET Core — Web API with Controllers
-- Entity Framework Core
-- MongoDB.Driver
+- MongoDB.Driver — native MongoDB client
 - AutoMapper — DTO ↔ Entity mapping
 - FluentValidation — nested validation (Order + OrderItems)
 - Polly — Retry, Circuit Breaker, Timeout, Fallback policies
