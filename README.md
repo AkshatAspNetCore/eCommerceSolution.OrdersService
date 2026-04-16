@@ -29,7 +29,7 @@ Services communicate via **HTTP clients** with **Polly-based fault tolerance** (
 - Polyglot persistence (MongoDB, MySQL, PostgreSQL)
 
 **Frontend** *(in development)*
-- Angular + TypeScript — UI for orders, products, users
+- Angular — UI for orders, products, users
 
 ## 📐 Project Structure (Clean Architecture)
 ├── ApiGateway/                      # Ocelot gateway routing requests to services  
