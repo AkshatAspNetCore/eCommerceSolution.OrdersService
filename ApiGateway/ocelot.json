@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "UpstreamPathTemplate": "/gateway/Orders",
+      "UpstreamPathTemplate": "/gateway/Orders/",
       "DownstreamPathTemplate": "/api/Orders",
       "DownstreamHostAndPorts": [
         {
@@ -86,7 +86,7 @@
 
     {
       "UpstreamPathTemplate": "/gateway/Products",
-      "DownstreamPathTemplate": "/api/Products",
+      "DownstreamPathTemplate": "/api/products",
       "DownstreamHostAndPorts": [
         {
           "Host": "products-microservice",
@@ -100,7 +100,7 @@
 
     {
       "UpstreamPathTemplate": "/gateway/Products/{productID}",
-      "DownstreamPathTemplate": "/api/Products/{productID}",
+      "DownstreamPathTemplate": "/api/products/{productID}",
       "DownstreamHostAndPorts": [
         {
           "Host": "products-microservice",
@@ -114,7 +114,7 @@
 
     {
       "UpstreamPathTemplate": "/gateway/Products/search/product-id/{productID}",
-      "DownstreamPathTemplate": "/api/Products/search/product-id/{productID}",
+      "DownstreamPathTemplate": "/api/products/search/product-id/{productID}",
       "DownstreamHostAndPorts": [
         {
           "Host": "products-microservice",
@@ -128,7 +128,7 @@
 
     {
       "UpstreamPathTemplate": "/gateway/Products/search/{searchString}",
-      "DownstreamPathTemplate": "/api/Products/search/{searchString}",
+      "DownstreamPathTemplate": "/api/products/search/{searchString}",
       "DownstreamHostAndPorts": [
         {
           "Host": "products-microservice",
@@ -142,7 +142,7 @@
 
     {
       "UpstreamPathTemplate": "/gateway/Users/Auth/register",
-      "DownstreamPathTemplate": "/api/Users/Auth/register",
+      "DownstreamPathTemplate": "/api/Auth/register",
       "DownstreamHostAndPorts": [
         {
           "Host": "users-microservice",
@@ -156,7 +156,7 @@
 
     {
       "UpstreamPathTemplate": "/gateway/Users/Auth/login",
-      "DownstreamPathTemplate": "/api/Users/Auth/login",
+      "DownstreamPathTemplate": "/api/Auth/login",
       "DownstreamHostAndPorts": [
         {
           "Host": "users-microservice",
@@ -181,12 +181,6 @@
       "DownstreamScheme": "http"
     }
   ],
-
-  /*
-  http://localhost:4000/gateway/orders //Upstream
-  http://ecommercesolution.orderservice:8080/api/Orders //Downstream
-  */
-
   "GlobalConfiguration": {
     "BaseUrl": "http://localhost:4000"
   }
