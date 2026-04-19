@@ -10,7 +10,12 @@
         }
       ],
       "UpstreamHttpMethod": [ "Get", "Post", "Options" ],
-      "DownstreamScheme": "http"
+      "DownstreamScheme": "http",
+
+      "CacheOptions": {
+        "TtlSeconds": 30, // Time-To-Live (TTL) in seconds for the cached downstream response, i.e., the absolute expiration timeout starting from when the item is added to the cache. This option is required. If undefined, it defaults to 0 (zero), which disables caching.
+        "Region": "orders" // Specifies the cache region to be cleared via Ocelot’s Administration API.
+      }
     },
 
 
@@ -94,7 +99,26 @@
         }
       ],
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Options" ],
-      "DownstreamScheme": "http"
+      "DownstreamScheme": "http",
+
+      "QoSOptions": {
+        "MinimumThroughput": 3,
+        "BreakDuration": 10000,
+        "Timeout": 5000
+      },
+
+      "RetryOptions": {
+        "RetryCount": 3,
+        "RetryOnServerError": true
+      },
+
+      "RateLimitOptions": {
+        "Limit": 100, // For developing
+        "Period": "1m",
+        "EnableRateLimiting": false, // For developing disabled rate limiting for the route. 
+        "Wait": 30
+       // "ClientWhitelist": [ "Client1", "Client2" ] // An array that contains the clients exempt from rate limiting
+      }
     },
 
 
@@ -183,5 +207,9 @@
   ],
   "GlobalConfiguration": {
     "BaseUrl": "http://localhost:4000"
+    //"RateLimitOptions": {
+     // "ClientIdHeader": "ClientId", // Specifies the header used to identify clients, with “Oc-Client” set as the default.,
+     // "StatusCode": 429 // Too many requests
+    //}
   }
 }
