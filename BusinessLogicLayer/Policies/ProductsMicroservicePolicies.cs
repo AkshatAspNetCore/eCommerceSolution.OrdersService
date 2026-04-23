@@ -27,7 +27,7 @@ public class ProductsMicroservicePolicies : IProductsMicroservicePolicies
                     ProductName: "Unavailable(fallback)",
                     Category: "Unavailable(fallback)",
                     UnitPrice: 0,
-                    Stock: 0
+                    QuantityInStock: 0
                 );
 
                 var response = new HttpResponseMessage(System.Net.HttpStatusCode.ServiceUnavailable) {

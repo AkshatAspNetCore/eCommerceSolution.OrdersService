@@ -85,7 +85,7 @@ public class ProductsMicroserviceClient
                 ProductName: "Unavailable (bulkhead isolation)",
                 Category: "Unavailable (bulkhead isolation)",
                 UnitPrice: 0,
-                Stock: 0);
+                QuantityInStock: 0);
         }
     }
 }

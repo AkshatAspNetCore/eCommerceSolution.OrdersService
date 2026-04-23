@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using BusinessLogicLayer.DTO;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -14,11 +16,13 @@ public class RabbitMQProductDeletionConsumer : IDisposable, IRabbitMQProductDele
     private IChannel? _channel;
     private IConnection? _connection;
     private readonly ILogger<RabbitMQProductDeletionConsumer> _logger;
+    private readonly IDistributedCache _cache;
 
-    public RabbitMQProductDeletionConsumer(IConfiguration configuration, ILogger<RabbitMQProductDeletionConsumer> logger)
+    public RabbitMQProductDeletionConsumer(IConfiguration configuration, ILogger<RabbitMQProductDeletionConsumer> logger, IDistributedCache cache)
     {
         _logger = logger;
         _configuration = configuration;
+        _cache = cache;
 
         string hostName = _configuration["RABBITMQ_HOST"]!;
         string userName = _configuration["RABBITMQ_USER"]!;
@@ -44,18 +48,25 @@ public class RabbitMQProductDeletionConsumer : IDisposable, IRabbitMQProductDele
     {
         if (_channel == null) await InitializeConnection();
 
-        string routingKey = "product.delete";
+        //string routingKey = "product.#";
+        var headers = new Dictionary<string, object?>()
+        {
+            {"x-match","all" },
+            {"event","product.delete" },
+            {"RowCount",1 }
+        };
+
         string queueName = "orders.product.delete.queue";
 
         // Create exchange if it doesn't exist
         string exchangeName = _configuration["RABBITMQ_PRODUCTS_EXCHANGE"]!;
-        await _channel.ExchangeDeclareAsync(exchange: exchangeName, type: ExchangeType.Direct, durable: true);
+        await _channel.ExchangeDeclareAsync(exchange: exchangeName, type: ExchangeType.Headers, durable: true);
 
         // Create message queue if it doesn't exist
         await _channel.QueueDeclareAsync(queue: queueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
 
         // Bind the queue to the exchange with the routing key
-        await _channel.QueueBindAsync(queue: queueName, exchange: exchangeName, routingKey: routingKey);
+        await _channel.QueueBindAsync(queue: queueName, exchange: exchangeName, routingKey: string.Empty, arguments: headers);
 
         AsyncEventingBasicConsumer consumer = new AsyncEventingBasicConsumer(_channel);
 
@@ -64,18 +75,22 @@ public class RabbitMQProductDeletionConsumer : IDisposable, IRabbitMQProductDele
             byte[] body = args.Body.ToArray();
             string message = Encoding.UTF8.GetString(body);
 
-            if (message != null)
-            {
-                ProductDeletionMessage? productDeletionMessage = JsonSerializer.Deserialize<ProductDeletionMessage>(message);
-
-                if (productDeletionMessage is not null)
-                    _logger.LogInformation($"Product is deleted:{productDeletionMessage.ProductID}, Product name:{productDeletionMessage.ProductName}");
-            }
-
+            await HandleProductDeletionMessage(message);
             await _channel.BasicAckAsync(args.DeliveryTag, multiple: false);
         };
 
         await _channel.BasicConsumeAsync(queue: queueName, autoAck: false, consumer: consumer);
+    }
+
+    private async Task HandleProductDeletionMessage(string message) 
+    {
+        ProductDTO? product = JsonSerializer.Deserialize<ProductDTO>(message);
+        if (product is not null)
+        {
+            string cacheKey = $"product:{product.ProductID}";
+            await _cache.RemoveAsync(cacheKey);
+            _logger.LogInformation($"Product deleted:{product.ProductID}, Product name:{product.ProductName}");
+        }
     }
 
     public void Dispose()
