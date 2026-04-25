@@ -24,12 +24,12 @@ namespace OrdersMicroservice.API.Middleware
             catch (Exception ex)
             {
                 // Log the exception here (e.g., using a logging framework like Serilog, NLog, etc.)
-                _logger.LogError($"{ex.GetType().ToString}:{ex.Message}");
+                _logger.LogError($"{ex.GetType()}:{ex.Message}");
 
                 if (ex.InnerException is not null)
                 {
                     // Log the inner exception as well
-                    _logger.LogError($"{ex.InnerException.GetType().ToString}:{ex.InnerException.Message}");
+                    _logger.LogError($"{ex.InnerException.GetType()}:{ex.InnerException.Message}");
                 }
 
                 httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
@@ -39,7 +39,7 @@ namespace OrdersMicroservice.API.Middleware
                 {
                     StatusCode = httpContext.Response.StatusCode,
                     Message = ex.Message,
-                    Type = ex.GetType().ToString()
+                    Type = ex.GetType()
                 });
             }
         }
