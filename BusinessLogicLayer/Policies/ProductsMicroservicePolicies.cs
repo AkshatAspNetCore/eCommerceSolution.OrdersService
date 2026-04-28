@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Bulkhead;
 using Polly.Fallback;
+using Polly.Wrap;
 using System.Text;
 using System.Text.Json;
 
@@ -10,10 +11,13 @@ namespace BusinessLogicLayer.Policies;
 
 public class ProductsMicroservicePolicies : IProductsMicroservicePolicies
 {
+    private readonly IPollyPolicies _pollyPolicies;
     private readonly ILogger<ProductsMicroservicePolicies> _logger;
 
-    public ProductsMicroservicePolicies(ILogger<ProductsMicroservicePolicies> logger) {
+    public ProductsMicroservicePolicies(ILogger<ProductsMicroservicePolicies> logger, IPollyPolicies pollyPolicies)
+    {
         _logger = logger;
+        _pollyPolicies = pollyPolicies;
     }
 
     public IAsyncPolicy<HttpResponseMessage> GetFallbackPolicy()
@@ -53,5 +57,15 @@ public class ProductsMicroservicePolicies : IProductsMicroservicePolicies
             });
 
         return policy;
+    }
+
+    public IAsyncPolicy<HttpResponseMessage> GetCombinedPolicy()
+    {
+        var retryPolicy = _pollyPolicies.GetRetryPolicy(3);
+        var circuitBreakerPolicy = _pollyPolicies.GetCircuitBreakerPolicy(3, TimeSpan.FromMinutes(20));
+        var timeoutPolicy = _pollyPolicies.GetTimeoutPolicy(TimeSpan.FromSeconds(20));
+
+        AsyncPolicyWrap<HttpResponseMessage> wrappedPolicy = Policy.WrapAsync(retryPolicy, circuitBreakerPolicy, timeoutPolicy);
+        return wrappedPolicy;
     }
 }
