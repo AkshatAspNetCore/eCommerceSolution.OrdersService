@@ -103,8 +103,8 @@
 
       "QoSOptions": {
         "MinimumThroughput": 3,
-        "BreakDuration": 20000,
-        "Timeout": 30000
+        "BreakDuration": 35000,
+        "Timeout": 35000
       },
 
       "RetryOptions": {
