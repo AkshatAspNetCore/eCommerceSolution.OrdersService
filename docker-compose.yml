@@ -1,6 +1,6 @@
 services:
-  ecommercesolution.orderservice:
-    image: ${DOCKER_REGISTRY-}ecommercesolutionorderservice
+  orders-microservice:
+    image: orders-microservice:latest
     build:
       context: .
       dockerfile: ECommerceSolution.OrderService/Dockerfile
@@ -122,7 +122,7 @@ services:
     networks:
      - ecommerce-network
     depends_on:
-     - ecommercesolution.orderservice
+     - orders-microservice
 
   rabbitmq:
     image: rabbitmq:management
