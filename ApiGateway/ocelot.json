@@ -1,0 +1,215 @@
+{
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/gateway/Orders/",
+      "DownstreamPathTemplate": "/api/Orders",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orders-microservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamHttpMethod": [ "Get", "Post", "Options" ],
+      "DownstreamScheme": "http",
+
+      "CacheOptions": {
+        "TtlSeconds": 30, // Time-To-Live (TTL) in seconds for the cached downstream response, i.e., the absolute expiration timeout starting from when the item is added to the cache. This option is required. If undefined, it defaults to 0 (zero), which disables caching.
+        "Region": "orders" // Specifies the cache region to be cleared via Ocelot’s Administration API.
+      }
+    },
+
+
+    {
+      "UpstreamPathTemplate": "/gateway/Orders/search/orderid/{orderID}",
+      "DownstreamPathTemplate": "/api/Orders/search/orderid/{orderID}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orders-microservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http"
+    },
+
+
+    {
+      "UpstreamPathTemplate": "/gateway/Orders/search/productid/{productID}",
+      "DownstreamPathTemplate": "/api/Orders/search/productid/{productID}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orders-microservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http"
+    },
+
+
+    {
+      "UpstreamPathTemplate": "/gateway/Orders/search/orderDate/{orderDate}",
+      "DownstreamPathTemplate": "/api/Orders/search/orderDate/{orderDate}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orders-microservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http"
+    },
+
+
+    {
+      "UpstreamPathTemplate": "/gateway/Orders/search/userid/{UserID}",
+      "DownstreamPathTemplate": "/api/Orders/search/userid/{UserID}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orders-microservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http"
+    },
+
+
+    {
+      "UpstreamPathTemplate": "/gateway/Orders/{orderID}",
+      "DownstreamPathTemplate": "/api/Orders/{orderID}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orders-microservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamHttpMethod": [ "Put", "Delete", "Options" ],
+      "DownstreamScheme": "http"
+    },
+
+
+    {
+      "UpstreamPathTemplate": "/gateway/Products",
+      "DownstreamPathTemplate": "/api/products",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "products-microservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Options" ],
+      "DownstreamScheme": "http",
+
+      "QoSOptions": {
+        "MinimumThroughput": 3,
+        "BreakDuration": 35000,
+        "Timeout": 35000
+      },
+
+      "RetryOptions": {
+        "RetryCount": 3,
+        "RetryOnServerError": true
+      },
+
+      "RateLimitOptions": {
+        "Limit": 100, // For developing
+        "Period": "1m",
+        "EnableRateLimiting": false, // For developing disabled rate limiting for the route. 
+        "Wait": 30
+       // "ClientWhitelist": [ "Client1", "Client2" ] // An array that contains the clients exempt from rate limiting
+      }
+    },
+
+
+    {
+      "UpstreamPathTemplate": "/gateway/Products/{productID}",
+      "DownstreamPathTemplate": "/api/products/{productID}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "products-microservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamHttpMethod": [ "Delete", "Options" ],
+      "DownstreamScheme": "http"
+    },
+
+
+    {
+      "UpstreamPathTemplate": "/gateway/Products/search/product-id/{productID}",
+      "DownstreamPathTemplate": "/api/products/search/product-id/{productID}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "products-microservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http"
+    },
+
+
+    {
+      "UpstreamPathTemplate": "/gateway/Products/search/{searchString}",
+      "DownstreamPathTemplate": "/api/products/search/{searchString}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "products-microservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http"
+    },
+
+
+    {
+      "UpstreamPathTemplate": "/gateway/Users/Auth/register",
+      "DownstreamPathTemplate": "/api/Auth/register",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "users-microservice",
+          "Port": 2929
+        }
+      ],
+      "UpstreamHttpMethod": [ "Post", "Options" ],
+      "DownstreamScheme": "http"
+    },
+
+
+    {
+      "UpstreamPathTemplate": "/gateway/Users/Auth/login",
+      "DownstreamPathTemplate": "/api/Auth/login",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "users-microservice",
+          "Port": 2929
+        }
+      ],
+      "UpstreamHttpMethod": [ "Post", "Options" ],
+      "DownstreamScheme": "http"
+    },
+
+
+    {
+      "UpstreamPathTemplate": "/gateway/Users/{userID}",
+      "DownstreamPathTemplate": "/api/Users/{userID}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "users-microservice",
+          "Port": 2929
+        }
+      ],
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:4000"
+    //"RateLimitOptions": {
+     // "ClientIdHeader": "ClientId", // Specifies the header used to identify clients, with “Oc-Client” set as the default.,
+     // "StatusCode": 429 // Too many requests
+    //}
+  }
+}
