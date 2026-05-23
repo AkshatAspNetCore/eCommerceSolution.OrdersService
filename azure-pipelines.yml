@@ -100,12 +100,10 @@ stages:
    displayName: Deploy to Dev 
    dependsOn: Test
    condition: and(succeeded('Build'), eq(variables['Build.SourceBranch'],'refs/heads/dev'))
-   variables: 
-   - group: orders-microservice-dev
    jobs:
    - template: deploy-job-template.yml
      parameters:
-      namespace: $(namespace)
+      namespace: ecommerce-dev
 
  - stage: DeployToQA
    displayName: Deploy to QA
