@@ -1,0 +1,22 @@
+parameters:
+- name: namespace
+  type: string
+
+jobs:
+- job: Deployment
+  displayName: Deployment to ${{ parameters.namespace }}
+  pool:
+   vmImage: $(vmImageName)
+  steps:
+  - checkout: self
+  - script: |
+     sed -i "s/__TAG__/$(tag)/g" $(deploymentFile)
+    displayName: Display image tag in deployment file
+  - task: KubernetesManifest@1
+    displayName: Deploy to AKS ${{ parameters.namespace }} namespace
+    inputs:
+     action: deploy
+     kubernetesServiceConnection: $(aksServiceConnectionName)
+     namespace: ${{ parameters.namespace }}
+     manifests: |
+      $(Build.SourcesDirectory)/k8s/**/*.yml
