@@ -109,42 +109,34 @@ stages:
    displayName: Deploy to QA
    dependsOn: Test
    condition: and(succeeded(), eq(variables['Build.SourceBranch'],'refs/heads/qa'))
-   variables: 
-   - group: orders-microservice-qa
    jobs:
    - template: deploy-job-template.yml
      parameters:
-      namespace: $(namespace)
+      namespace: ecommerce-qa
 
  - stage: DeployToUAT
    displayName: Deploy to UAT
    dependsOn: Test
    condition: and(succeeded('Build'), eq(variables['Build.SourceBranch'],'refs/heads/uat'))
-   variables: 
-   - group: orders-microservice-uat
    jobs:
    - template: deploy-job-template.yml
      parameters:
-      namespace: $(namespace)
+      namespace: ecommerce-uat
 
  - stage: DeployToStaging
    displayName: Deploy to Staging
    dependsOn: Test
    condition: and(succeeded('Build'), eq(variables['Build.SourceBranch'],'refs/heads/staging'))
-   variables: 
-   - group: orders-microservice-staging
    jobs:
    - template: deploy-job-template.yml
      parameters:
-      namespace: $(namespace)
+      namespace: ecommerce-staging
 
  - stage: DeployToProd
    displayName: Deploy to Prod
    dependsOn: Test
    condition: and(succeeded('Build'), eq(variables['Build.SourceBranch'],'refs/heads/prod'))
-   variables: 
-   - group: orders-microservice-prod
    jobs:
    - template: deploy-job-template.yml
      parameters:
-      namespace: $(namespace)
+      namespace: ecommerce-prod
