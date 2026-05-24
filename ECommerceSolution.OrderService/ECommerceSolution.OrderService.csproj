@@ -21,4 +21,8 @@
     <ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="k8s\" />
+  </ItemGroup>
+
 </Project>
