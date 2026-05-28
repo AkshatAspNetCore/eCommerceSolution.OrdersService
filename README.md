@@ -6,6 +6,8 @@ Part of a **3-service microservices architecture** built with **ASP.NET Core**, 
 
 This Orders Microservice is one of three services in a distributed eCommerce system:
 
+![eCommerce microservices architecture](orders_microservice_architecture.png)
+
 | Service | Responsibility | Database |
 |---------|---------------|----------|
 | UsersService | User management — JWT & registration *(coming soon)* | PostgreSQL |
