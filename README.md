@@ -10,7 +10,7 @@ This Orders Microservice is one of three services in a distributed eCommerce sys
 
 | Service | Responsibility | Database |
 |---------|---------------|----------|
-| UsersService | User management — JWT & registration *(coming soon)* | PostgreSQL |
+| UsersService | User management — *JWT & registration* | Entra ID |
 | ProductsService | Product catalog, search, inventory | MySQL |
 | **OrdersService** (this repo) | Order processing, validation, aggregation | MongoDB |
 
