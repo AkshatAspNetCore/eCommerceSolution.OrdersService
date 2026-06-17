@@ -31,7 +31,7 @@ Services communicate via **HTTP clients** with **Polly-based fault tolerance** (
 - Ocelot API Gateway
 - Polyglot persistence (MongoDB, MySQL, PostgreSQL)
 
-**Frontend** *(in development)*
+**Frontend** 
 - Angular — UI for orders, products, users
 
 ## 📐 Project Structure (Clean Architecture)
@@ -41,12 +41,6 @@ Services communicate via **HTTP clients** with **Polly-based fault tolerance** (
 ├── ECommerceSolution.OrderService/  # API layer, Controllers, Program.cs, Dockerfile  
 ├── docker-compose.yml               # Multi-container orchestration  
 └── docker-compose.override.yml      # Development overrides  
-
-## 🚀 Getting Started
-
-Detailed setup instructions and prerequisites will follow soon. 🛠️
-
-Project is actively under development — stay tuned.
 
 ## ✨ Key Features
 
@@ -59,13 +53,6 @@ Project is actively under development — stay tuned.
 - ✅ **FluentValidation** with nested validation rules
 - ✅ **AutoMapper profiles** for clean DTO mappings
 
-## 🔮 Roadmap
-
-- [ ] JWT authentication & user registration in UsersService
-- [ ] RabbitMQ + MassTransit for event-driven communication
-- [ ] Unit tests (xUnit + Moq)
-- [ ] Angular frontend (in development)
-- [ ] Azure deployment
 
 ## Learning Project
 
