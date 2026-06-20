@@ -4,7 +4,6 @@ Part of a **3-service microservices architecture** built with **ASP.NET Core**, 
 
 ## 📝 Note for Reviewers
 
-[!IMPORTANT]
 > This is a **cost-optimized learning deployment**. The databases run as **ephemeral pods with no persistent storage attached**, and the AKS cluster is shut down outside of demo hours to keep Azure costs near zero.
 
 **What this means in practice:**
