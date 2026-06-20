@@ -19,7 +19,7 @@ In a production setup, durability would come from **managed databases** (e.g., A
 
 This Orders Microservice is one of three services in a distributed eCommerce system:
 
-![eCommerce microservices architecture](orders_microservice_architecture_v2.png)
+![eCommerce microservices architecture](orders_microservice_architecture_v3.png)
 
 | Service | Responsibility | Database |
 |---------|---------------|----------|
